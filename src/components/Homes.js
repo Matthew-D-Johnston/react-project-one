@@ -1,11 +1,25 @@
+import { useState } from 'react';
 import Home from "./Home";
 
-const Homes = ({ homes, setModalItem }) => {
+const Homes = ({ homes, setModalItem, favoriteHomes, setFavoriteHomes }) => {
+  const [showAllHomes, setShowAllHomes] = useState(true);
+
+  const handleButtonClick = () => {
+    setShowAllHomes(!showAllHomes);
+  }
+
+  let displayedHomes;
+  if (showAllHomes) {
+    displayedHomes = homes;
+  } else {
+    displayedHomes = favoriteHomes;
+  }
+
   return (
     <div className="homesListContainer">
-      <button className="button">Show Saved Homes</button>
+      <button className="button" onClick={handleButtonClick}>{showAllHomes ? 'Show Saved Homes' : 'Show All Homes'}</button>
       <div className="homesList">
-        {homes.map((home) => {
+        {displayedHomes.map((home) => {
           return (
             <Home
               key={home.homePlanId}

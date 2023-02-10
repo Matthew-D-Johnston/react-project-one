@@ -6,7 +6,7 @@ import { formatAltAtts } from "../helpers/formatAltAtts";
 const Home = ({ home, setModalItem }) => {
   return (
     <>
-      <Link to={`?home=${home.homePlanId}`} onClick={() => setModalItem(home)}>
+      <Link to={`?home=${home.homePlanId}`}>
         <div className="cardContainer">
           <div className="cardImageContainer">
             <img src={home.image} alt={formatAltAtts(home.name)} />

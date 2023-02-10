@@ -1,25 +1,8 @@
-import { useState, useEffect } from "react";
 import HomeInfoContainer from "./HomeInfoContainer";
-import CompatibleLots from "./CompatibleLots";
 import { formatAltAtts } from "../helpers/formatAltAtts";
-import { API } from "../apiClient";
 
-const HomeModal = ({ home, lots }) => {
-  const [compatibleLots, setCompatibleLots] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await API.getCombinations();
-      const compatibleLotIds = response
-        .filter((obj) => obj.homePlanId === home.homePlanId)
-        .map((obj) => obj.lotId);
-      const selectedLots = lots.filter(({ lotId }) => {
-        return compatibleLotIds.includes(lotId);
-      });
-      setCompatibleLots(selectedLots);
-    })();
-  }, [home.homePlanId, lots]);
-
+const HomeModal = ({ home }) => {
   return (
     <>
       <div className="modalImageContainer">
@@ -33,7 +16,6 @@ const HomeModal = ({ home, lots }) => {
           </button>
         </div>
       </div>
-      <CompatibleLots compatibleLots={compatibleLots} />
     </>
   );
 };
