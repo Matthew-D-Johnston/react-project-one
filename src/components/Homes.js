@@ -1,34 +1,22 @@
-import { useState, useEffect } from 'react';
-import { API } from '../apiClient';
+import Home from "./Home";
 
-import Home from './Home';
-
-const Homes = () => {
-  const [homes, setHomes] = useState([]);
-
-  useEffect(() => {
-    const getHomes = async () => {
-      const response = await API.getHomePlans();
-      setHomes(response);
-    }
-
-    try {
-      getHomes();
-    } catch (error) {
-      console.error('error');
-    }
-  }, []);
-
+const Homes = ({ homes, setModalItem }) => {
   return (
-      <div className="homesListContainer">
-        <button className="button">Show Saved Homes</button>
-        <div className="homesList">
-            {homes.map(home => {
-              return <Home home={home} />;
-            })}
-        </div>
-      </div> 
+    <div className="homesListContainer">
+      <button className="button">Show Saved Homes</button>
+      <div className="homesList">
+        {homes.map((home) => {
+          return (
+            <Home
+              key={home.homePlanId}
+              home={home}
+              setModalItem={setModalItem}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
-}
+};
 
 export default Homes;

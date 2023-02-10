@@ -1,9 +1,3 @@
-export const formatAltAtts = (name, type) => {
-  if (type === 'home') {
-    return name.toLowerCase().replace(' ', '-');
-  } else {
-    const address = name.split(',');
-    return address.toLowerCase().replace(' ', '-');
-  }
-}
-
+export const formatAltAtts = (name) => {
+  return name.toLowerCase().replaceAll(" ", "-");
+};
